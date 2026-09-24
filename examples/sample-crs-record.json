@@ -1,0 +1,26 @@
+{
+  "$comment": "Sample CRS v0.1 attestation record — illustrative only, not a real attestation",
+  "agent_did": "did:web:agents.example-bank.com:credit-decision-v3-prod",
+  "reporting_period_start": "2026-07-01",
+  "reporting_period_end": "2026-09-30",
+  "system_scope": {
+    "decision_categories": ["retail_credit_scoring", "loan_approval_recommendation"],
+    "deployer_did": "did:web:example-bank.com:ai-governance",
+    "authorization_chain_reference": "sha256:4d2f8c1a9b3e7f2d0c6a8b5e1f4d9c2a3b6e8f1d"
+  },
+  "calibration_rate": 0.87,
+  "false_positive_rate": 0.038,
+  "expected_calibration_error": 0.032,
+  "human_review_rate": 0.12,
+  "systematic_failure_disclosures": [],
+  "reattestation_event_log": [
+    {
+      "trigger_condition": "training_data_drift",
+      "update_description": "Quarterly model refresh — training data updated to include Q2 2026 lending outcomes",
+      "reattestation_completed_date": "2026-07-15"
+    }
+  ],
+  "attester_did": "did:web:isg.ai:attestation-authority",
+  "attestation_date": "2026-10-15",
+  "regulatory_jurisdiction": ["ADGM_FSRA", "MAS"]
+}

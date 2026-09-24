@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this specification, please cite it as below."
+type: software
+title: "Calibration Reporting Standard (CRS) v0.1"
+abstract: "A 13-field structured attestation protocol for autonomous AI agent calibration disclosure in regulated financial systems."
+authors:
+  - family-names: Chan
+    given-names: Eric T.C.
+    orcid: https://orcid.org/0009-0009-8249-7623
+    affiliation: "Purdue Polytechnic Institute; Innovative Solution Group (ISG)"
+    email: chan629@purdue.edu
+date-released: "2026-09-24"
+version: "0.1.0"
+license: MIT
+repository-code: https://github.com/ericchantc/crs-specification
+doi: 10.2139/ssrn.7511058
+preferred-citation:
+  type: unpublished
+  authors:
+    - family-names: Chan
+      given-names: Eric T.C.
+      orcid: https://orcid.org/0009-0009-8249-7623
+  title: "Accountability Infrastructure for Agentic and Autonomous Financial Systems"
+  year: 2026
+  notes: "SSRN Working Paper 7511058"
+  url: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7511058

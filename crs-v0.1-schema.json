@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://isg.ai/standards/crs/v0.1/schema.json",
+  "title": "Calibration Reporting Standard (CRS) v0.1",
+  "description": "A 13-field structured attestation protocol for autonomous AI agent calibration disclosure in regulated financial systems. Proposed by Eric T.C. Chan, Innovative Solution Group (ISG). Patent pending. Reference: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7511058",
+  "type": "object",
+  "required": [
+    "agent_did",
+    "reporting_period_start",
+    "reporting_period_end",
+    "system_scope",
+    "calibration_rate",
+    "false_positive_rate",
+    "expected_calibration_error",
+    "human_review_rate",
+    "systematic_failure_disclosures",
+    "reattestation_event_log",
+    "attester_did",
+    "attestation_date",
+    "regulatory_jurisdiction"
+  ],
+  "properties": {
+
+    "agent_did": {
+      "type": "string",
+      "description": "Field 1 — W3C Decentralized Identifier (DID) of the AI agent. Binds this attestation record to a specific, verifiable agent identity. Format: did:<method>:<identifier>.",
+      "pattern": "^did:[a-z]+:.+$",
+      "examples": ["did:web:agents.example-bank.com:credit-decision-v3"]
+    },
+
+    "reporting_period_start": {
+      "type": "string",
+      "description": "Field 2 — Start date of the calibration reporting period (ISO 8601 date).",
+      "format": "date",
+      "examples": ["2026-07-01"]
+    },
+
+    "reporting_period_end": {
+      "type": "string",
+      "description": "Field 3 — End date of the calibration reporting period (ISO 8601 date). Must be after reporting_period_start.",
+      "format": "date",
+      "examples": ["2026-09-30"]
+    },
+
+    "system_scope": {
+      "type": "object",
+      "description": "Field 4 — System scope definition: the financial decision categories the agent is authorised to perform during this reporting period, the deploying institution, and the authorisation chain reference.",
+      "required": ["decision_categories", "deployer_did", "authorization_chain_reference"],
+      "properties": {
+        "decision_categories": {
+          "type": "array",
+          "items": {"type": "string"},
+          "minItems": 1,
+          "description": "List of authorised financial decision categories covered by this attestation.",
+          "examples": [["credit_risk_scoring", "loan_approval_recommendation"]]
+        },
+        "deployer_did": {
+          "type": "string",
+          "description": "W3C DID of the deploying financial institution accountable for this agent.",
+          "pattern": "^did:[a-z]+:.+$",
+          "examples": ["did:web:example-bank.com:ai-governance"]
+        },
+        "authorization_chain_reference": {
+          "type": "string",
+          "description": "Hash or URI referencing the authorisation chain document (board resolution, delegation record) that approved this agent's deployment.",
+          "examples": ["sha256:4d2f8c1a9b3e7f2d0c6a8b5e1f4d9c2a"]
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "calibration_rate": {
+      "type": "number",
+      "description": "Field 5 — Calibration Rate (CR): proportion of the agent's probabilistic predictions falling within plus or minus 5 percentage points of observed outcomes over the reporting period. Compliance threshold: CR >= 0.80. Values below this threshold flag the agent as requiring remediation before attestation issuance.",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "examples": [0.87]
+    },
+
+    "false_positive_rate": {
+      "type": "number",
+      "description": "Field 6 — False Positive Rate (FPR): proportion of negative cases incorrectly classified as positive over the reporting period.",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "examples": [0.04]
+    },
+
+    "expected_calibration_error": {
+      "type": "number",
+      "description": "Field 7 — Expected Calibration Error (ECE): probability-weighted mean absolute difference between predicted confidence and observed accuracy across equal-width confidence bins (Guo et al., 2017). Compliance threshold: ECE < 0.05. Mandatory recalibration threshold: ECE > 0.10.",
+      "minimum": 0.0,
+      "examples": [0.032]
+    },
+
+    "human_review_rate": {
+      "type": "number",
+      "description": "Field 8 — Human Review Rate: proportion of the agent's autonomous decisions reviewed by a qualified human principal during the reporting period. Supports human oversight requirements under EU AI Act Art. 14 and MAS SAFR.",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "examples": [0.15]
+    },
+
+    "systematic_failure_disclosures": {
+      "type": "array",
+      "description": "Field 9 — Disclosures of any decision categories where CR < 0.80 or ECE > 0.10 occurred during the reporting period. Empty array indicates no systematic failures. Enables targeted remediation and proportionate regulatory response.",
+      "items": {
+        "type": "object",
+        "required": ["decision_category", "failure_type", "cr_value", "ece_value"],
+        "properties": {
+          "decision_category": {
+            "type": "string",
+            "description": "The specific decision category in which the failure occurred."
+          },
+          "failure_type": {
+            "type": "string",
+            "enum": ["cr_below_threshold", "ece_above_threshold", "both"],
+            "description": "Whether CR fell below 0.80, ECE exceeded 0.10, or both."
+          },
+          "cr_value": {
+            "type": "number",
+            "description": "Observed CR value during the failure period."
+          },
+          "ece_value": {
+            "type": "number",
+            "description": "Observed ECE value during the failure period."
+          }
+        },
+        "additionalProperties": false
+      },
+      "examples": [[]]
+    },
+
+    "reattestation_event_log": {
+      "type": "array",
+      "description": "Field 10 — Log of all material model updates since the prior attestation that triggered re-attestation. Five trigger conditions apply (standard: 30-day window; emergency: 72-hour window). Empty array if no re-attestation events occurred.",
+      "items": {
+        "type": "object",
+        "required": ["trigger_condition", "update_description", "reattestation_completed_date"],
+        "properties": {
+          "trigger_condition": {
+            "type": "string",
+            "enum": [
+              "prediction_accuracy_decline_5pct",
+              "training_data_drift",
+              "deployment_scope_expansion",
+              "model_architecture_change",
+              "regulatory_threshold_breach"
+            ],
+            "description": "The condition that triggered re-attestation. First four: 30-day standard window. Last: 72-hour emergency window."
+          },
+          "update_description": {
+            "type": "string",
+            "description": "Description of the model update or change that triggered re-attestation."
+          },
+          "reattestation_completed_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date on which re-attestation was completed (ISO 8601)."
+          }
+        },
+        "additionalProperties": false
+      },
+      "examples": [[]]
+    },
+
+    "attester_did": {
+      "type": "string",
+      "description": "Field 11 — W3C DID of the accredited third-party auditor issuing this attestation. The attester must hold current accreditation from the applicable regulatory jurisdiction. Separates the deploying institution from the attesting authority.",
+      "pattern": "^did:[a-z]+:.+$",
+      "examples": ["did:web:isg.ai:attestation-authority"]
+    },
+
+    "attestation_date": {
+      "type": "string",
+      "description": "Field 12 — Date on which this attestation record was generated and signed by the attester (ISO 8601 date).",
+      "format": "date",
+      "examples": ["2026-10-15"]
+    },
+
+    "regulatory_jurisdiction": {
+      "type": "array",
+      "description": "Field 13 — Regulatory jurisdiction(s) under which this attestation is issued. Multiple jurisdictions supported for cross-border deployments. Use 'OTHER' with a note for jurisdictions not yet enumerated.",
+      "items": {
+        "type": "string",
+        "enum": ["ADGM_FSRA", "MAS", "FCA", "FSB", "SEC_OCC_FDIC", "ESMA", "HKMA", "APRA", "OSFI", "OTHER"]
+      },
+      "minItems": 1,
+      "examples": [["ADGM_FSRA", "MAS"]]
+    }
+
+  },
+  "additionalProperties": false,
+
+  "$defs": {
+    "compliance_determination": {
+      "description": "Derived from fields 5 and 7. Not stored in the record — computed at evaluation time by the CRS Measurement Engine.",
+      "type": "string",
+      "enum": [
+        "COMPLIANT",
+        "REQUIRES_REMEDIATION",
+        "MANDATORY_RECALIBRATION"
+      ],
+      "x-derivation-rules": {
+        "COMPLIANT": "CR >= 0.80 AND ECE < 0.05",
+        "REQUIRES_REMEDIATION": "CR < 0.80 OR (ECE >= 0.05 AND ECE <= 0.10)",
+        "MANDATORY_RECALIBRATION": "ECE > 0.10"
+      }
+    }
+  }
+}
