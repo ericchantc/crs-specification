@@ -24,7 +24,7 @@
     "agent_did": {
       "type": "string",
       "description": "Field 1 — W3C Decentralized Identifier (DID) of the AI agent. Binds this attestation record to a specific, verifiable agent identity. Format: did:<method>:<identifier>.",
-      "pattern": "^did:[a-z]+:.+$",
+      "pattern": "^did:[a-z0-9]+:[^\\s]+$",
       "examples": ["did:web:agents.example-bank.com:credit-decision-v3"]
     },
 
@@ -57,7 +57,7 @@
         "deployer_did": {
           "type": "string",
           "description": "W3C DID of the deploying financial institution accountable for this agent.",
-          "pattern": "^did:[a-z]+:.+$",
+          "pattern": "^did:[a-z0-9]+:[^\\s]+$",
           "examples": ["did:web:example-bank.com:ai-governance"]
         },
         "authorization_chain_reference": {
@@ -166,7 +166,7 @@
     "attester_did": {
       "type": "string",
       "description": "Field 11 — W3C DID of the accredited third-party auditor issuing this attestation. The attester must hold current accreditation from the applicable regulatory jurisdiction. Separates the deploying institution from the attesting authority.",
-      "pattern": "^did:[a-z]+:.+$",
+      "pattern": "^did:[a-z0-9]+:[^\\s]+$",
       "examples": ["did:web:truon.ai:attestation-authority"]
     },
 
