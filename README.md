@@ -14,7 +14,7 @@ Every major governance framework has acknowledged this gap:
 
 - SR 26-2 (Fed/FDIC/OCC, April 2026) explicitly excluded agentic AI from its scope
 - The FCA Mills Review (July 2026) called for "a trusted framework for AI agent participation in financial services, clarifying how agents can be authorised, identified and held accountable"
-- MAS SAFR (July 2026) established runtime governance checkpoints but did not specify an institutional accountability standard
+- MAS FEAT Principles (2018) established fairness, ethics, accountability and transparency requirements for AI in financial services but did not specify a standardised attestation format for agentic AI systems
 - EU AI Act (in force August 2, 2026) requires per-decision audit trails under Article 12 but does not specify what those trails must contain
 
 CRS is a proposed answer to that question.
@@ -99,9 +99,7 @@ If you are working on AI agent governance, insurance underwriting for AI, or reg
 
 | Paper | Domain | ECE achieved | Relevance |
 |---|---|---|---|
-| Guo et al. (2017) ICML | Computer vision (foundational) | 2–4% post-calibration | Establishes 2–4% as achievable post-calibration baseline |
-| CreditR1 (2025) Mathematics journal | Corporate credit LLM | ECE = 0.047 | Finance-specific calibrated model sits at the CRS < 5% frontier |
-| Kalander et al. (2025) arXiv:2603.06733 | Finance credit risk | ECE = 0.015 | Finance model with temporal validation comfortably within threshold |
+| Guo et al. (2017) ICML | Computer vision (foundational) | ECE reduced substantially post-calibration; temperature scaling brings ECE well below 0.05 | Foundational empirical basis for the sub-5% ECE compliance threshold |
 | Industry consensus | Finance/health baseline | < 0.05 = acceptable; > 0.05 = recalibrate | CRS thresholds align with field consensus |
 | Healthcare clinical analog | Clinical AI | ECE ≤ 0.03 required | CRS < 0.05 is less strict than high-stakes clinical AI — defensible for finance |
 
@@ -115,7 +113,7 @@ Chan, E.T.C. (2026). *Accountability Infrastructure for Agentic and Autonomous F
 
 ## IP Notice
 
-Patent pending (USPTO provisional application, 2026). Innovative Solution Group (ISG). This specification is published as an open standard for review and adoption. The certification service and attestation authority are commercial implementations.
+Two PCT international patent applications are pending: CRS-PCT-2026-001 (filed September 26, 2026) covering the 13-field Calibration Reporting Standard schema, and CRS-EXT-PCT-2026-001 (filed October 2, 2026) covering the Extended Accountability Schema. Applicant: Eric T.C. Chan. This specification is published as an open standard for review and adoption under the Apache 2.0 license. Commercial implementations and the attestation authority service are operated by TRUON. See `PATENTS.md` for licensing details.
 
 ---
 

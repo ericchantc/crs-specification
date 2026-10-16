@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://isg.ai/standards/crs/v0.1/schema.json",
+  "$id": "https://raw.githubusercontent.com/ericchantc/crs-specification/main/crs-v0.1-schema.json",
   "title": "Calibration Reporting Standard (CRS) v0.1",
-  "description": "A 13-field structured attestation protocol for autonomous AI agent calibration disclosure in regulated financial systems. Proposed by Eric T.C. Chan, Innovative Solution Group (ISG). Patent pending. Reference: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7511058",
+  "description": "A 13-field structured attestation protocol for autonomous AI agent calibration disclosure in regulated financial systems. Proposed by Eric T.C. Chan, TRUON. Patent pending. Reference: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7511058",
   "type": "object",
   "required": [
     "agent_did",
@@ -94,7 +94,7 @@
 
     "human_review_rate": {
       "type": "number",
-      "description": "Field 8 — Human Review Rate: proportion of the agent's autonomous decisions reviewed by a qualified human principal during the reporting period. Supports human oversight requirements under EU AI Act Art. 14 and MAS SAFR.",
+      "description": "Field 8 — Human Review Rate: proportion of the agent's autonomous decisions reviewed by a qualified human principal during the reporting period. Supports human oversight requirements under EU AI Act Art. 14 and MAS FEAT.",
       "minimum": 0.0,
       "maximum": 1.0,
       "examples": [0.15]
@@ -167,7 +167,7 @@
       "type": "string",
       "description": "Field 11 — W3C DID of the accredited third-party auditor issuing this attestation. The attester must hold current accreditation from the applicable regulatory jurisdiction. Separates the deploying institution from the attesting authority.",
       "pattern": "^did:[a-z]+:.+$",
-      "examples": ["did:web:isg.ai:attestation-authority"]
+      "examples": ["did:web:truon.ai:attestation-authority"]
     },
 
     "attestation_date": {

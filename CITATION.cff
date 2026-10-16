@@ -7,11 +7,11 @@ authors:
   - family-names: Chan
     given-names: Eric T.C.
     orcid: https://orcid.org/0009-0009-8249-7623
-    affiliation: "Purdue Polytechnic Institute; Innovative Solution Group (ISG)"
+    affiliation: "Purdue Polytechnic Institute; TRUON"
     email: chan629@purdue.edu
 date-released: "2026-09-24"
 version: "0.1.0"
-license: MIT
+license: Apache-2.0
 repository-code: https://github.com/ericchantc/crs-specification
 doi: 10.2139/ssrn.7511058
 preferred-citation:
