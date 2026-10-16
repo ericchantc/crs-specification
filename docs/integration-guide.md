@@ -74,11 +74,10 @@ Response 404:
 
 | Framework | CRS field | Alignment |
 |---|---|---|
-| US model risk governance gap | F7 ECE, F10 re-attestation log | Addresses accountability gap for agentic AI systems not covered by existing US model-risk guidance |
-| EU AI Act Art. 9 — risk management | F5 CR, F7 ECE, F9 failures | Art. 9(7) continuous monitoring |
-| MAS FEAT Principle 1 | F5 CR, F8 human review rate | Fairness and accuracy evidence |
-| ADGM FSRA AI guidance | F11 independent attester, F13 jurisdiction | Independent accountability chain |
-| ISO 42001 Clause 9.1 | F5-F10 | Machine-readable performance monitoring |
+| US model risk governance gap (SR 26-2 explicitly excludes agentic AI) | F7 ECE, F10 re-attestation log | Addresses accountability gap for agentic AI systems not covered by existing US model-risk guidance |
+| EU AI Act Art. 9 — risk management system | F5 CR, F7 ECE, F9 failures | Art. 9 requires an established, documented, and continuously maintained risk management system for high-risk AI |
+| MAS FEAT — Fairness (Principles 1-4) | F5 CR, F8 human review rate | Fairness: justifiability and accuracy requirements for AIDA-driven decisions |
+| ADGM FSRA — regulatory jurisdiction | F11 independent attester, F13 jurisdiction | Supported jurisdiction for deployments in the Abu Dhabi Global Market |
 
 ## DID infrastructure
 
