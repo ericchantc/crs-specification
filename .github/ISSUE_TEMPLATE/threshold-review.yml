@@ -1,0 +1,43 @@
+name: Threshold Review
+description: Challenge or support a CRS compliance threshold with empirical evidence
+title: "[THRESHOLD] "
+labels: ["threshold-review"]
+body:
+  - type: dropdown
+    id: threshold
+    attributes:
+      label: Which threshold?
+      options:
+        - "CR >= 0.80 (calibration rate — compliance)"
+        - "ECE < 0.05 (compliance gate)"
+        - "ECE 0.05-0.10 (30-day remediation window)"
+        - "ECE > 0.10 (72-hour mandatory recalibration)"
+        - "human_review_rate < 0.001 (supervisory adequacy trigger)"
+    validations:
+      required: true
+  - type: dropdown
+    id: domain
+    attributes:
+      label: Deployment domain
+      options:
+        - Credit / lending
+        - Fraud detection
+        - Trading / execution
+        - Insurance underwriting
+        - AML / compliance monitoring
+        - Other (specify below)
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Empirical basis
+      description: Cite the specific paper, dataset, or production evidence. Include DOI or arXiv ID where possible.
+      placeholder: "e.g. Guo et al. (2017) ECE on CIFAR-100 before/after temperature scaling (arXiv:1706.04599)"
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed change (optional)
+      description: If you are proposing a different threshold value, state it and the justification.
