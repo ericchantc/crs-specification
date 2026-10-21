@@ -1,21 +1,35 @@
-# Patent Notice
+# Patents
 
-## Coverage
+This repository contains the CRS v0.1 specification and JSON Schema.
 
-This repository implements the Calibration Reporting Standard (CRS) 13-field attestation schema.
+## Patent Notices
 
-The CRS schema is covered by PCT international patent application **CRS-PCT-2026-001** (filed September 26, 2026, CHAN Eric Tsz Chung, applicant). Use of the schema under the Apache 2.0 license in this repository includes a patent license to the claims of CRS-PCT-2026-001 that are necessarily infringed by an implementation of the 13-field schema as described in this repository.
+Two PCT international patent applications are pending that cover methods
+implemented by or derived from this specification:
 
-## Reservation
+- **CRS-PCT-2026-001** — *Calibration Reporting Standard for Agentic AI Accountability*
+  Filed: September 26, 2026 | PCT International Application
+  Covers: the 13-field calibration attestation schema and associated methods
 
-PCT international patent application **CRS-EXT-PCT-2026-001** (filed October 2, 2026, CHAN Eric Tsz Chung, applicant) covers related components and applications that are NOT part of this repository and are NOT covered by the Apache 2.0 license grant here. No rights are granted to those claims under this license.
+- **CRS-EXT-PCT-2026-001** — *Extended Accountability Schema for Agentic AI Systems*
+  Filed: October 2, 2026 | PCT International Application
+  Covers: the extended G1-G10 accountability schema and validation methods
 
-For licensing inquiries: contact@truon.ai
+## License vs. Patent Rights
 
-## RAND Commitment
+The Apache 2.0 license in this repository grants rights to the **software and
+specification text** in this repository. It does **not** grant any patent license.
 
-If any claims from CRS-PCT-2026-001 or CRS-EXT-PCT-2026-001 become standard-essential in connection with any adoption of the CRS schema by ISO, IETF, W3C, or equivalent standards body, the applicant commits to license those claims on reasonable and non-discriminatory (RAND) terms to any implementer, without discrimination as to implementer size, nationality, or business model.
+Commercial implementations of the CRS schema that practice the patented methods
+require a separate patent license.
 
-## No Additional Restrictions
+## RAND Licensing
 
-Nothing in this notice limits the rights granted under the Apache 2.0 license with respect to the 13-field schema implemented in this repository.
+The inventor is committed to licensing any granted patent claims on Reasonable
+and Non-Discriminatory (RAND) terms to any implementer of the schema layer,
+consistent with good-faith standards-body practice.
+
+## Contact
+
+For patent licensing inquiries: chan629@purdue.edu
+Inventor: CHAN Eric Tsz Chung
