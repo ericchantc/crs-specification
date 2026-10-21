@@ -1,0 +1,33 @@
+name: Validate JSON Schema
+
+on:
+  push:
+    paths:
+      - 'crs-v0.1-schema.json'
+      - 'examples/*.json'
+  pull_request:
+    paths:
+      - 'crs-v0.1-schema.json'
+      - 'examples/*.json'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ajv-cli
+        run: npm install -g ajv-cli ajv-formats
+
+      - name: Validate schema is well-formed (draft 2020-12)
+        run: |
+          ajv compile -s crs-v0.1-schema.json --spec=draft2020 -c ajv-formats
+          echo "Schema compilation passed"
+
+      - name: Validate examples against schema
+        run: |
+          for f in examples/*.json; do
+            echo "Validating $f..."
+            ajv validate -s crs-v0.1-schema.json -d "$f" --spec=draft2020 -c ajv-formats
+          done
+          echo "All examples valid"
