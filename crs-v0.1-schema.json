@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/ericchantc/crs-specification/main/crs-v0.1-schema.json",
+  "$id": "https://ericchantc.github.io/crs-specification/crs-v0.1-schema.json",
   "title": "Calibration Reporting Standard (CRS) v0.1",
   "description": "A 13-field structured attestation protocol for autonomous AI agent calibration disclosure in regulated financial systems. Proposed by Eric T.C. Chan, TRUON. Patent pending. Reference: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7511058",
   "type": "object",
