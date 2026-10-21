@@ -5,6 +5,7 @@
 [![Schema](https://img.shields.io/badge/Schema-v0.1.0-green.svg)](crs-v0.1-schema.json)
 [![Issues](https://img.shields.io/github/issues/ericchantc/crs-specification)](https://github.com/ericchantc/crs-specification/issues)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![JSON Schema](https://img.shields.io/badge/JSON_Schema-2020--12-blue.svg)](https://ericchantc.github.io/crs-specification/crs-v0.1-schema.json)
 
 **Status:** Open draft for review | **Version:** 0.1.0 | **Published:** 2026-09-24
 
@@ -98,7 +99,7 @@ The full JSON Schema (draft 2020-12) is in `crs-v0.1-schema.json`.
 ### Quick Reference
 
 ```bash
-curl -s https://raw.githubusercontent.com/ericchantc/crs-specification/main/crs-v0.1-schema.json
+curl -s https://ericchantc.github.io/crs-specification/crs-v0.1-schema.json
 ```
 
 ---
