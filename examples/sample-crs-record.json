@@ -18,11 +18,11 @@
   "reattestation_event_log": [
     {
       "trigger_condition": "training_data_drift",
-      "update_description": "Quarterly model refresh \u2014 training data updated to include Q2 2026 lending outcomes",
+      "update_description": "Quarterly model refresh: training data updated to include Q2 2026 lending outcomes",
       "reattestation_completed_date": "2026-07-15"
     }
   ],
-  "attester_did": "did:web:isg.ai:attestation-authority",
+  "attester_did": "did:web:truon.ai:attestation-authority",
   "attestation_date": "2026-10-15",
   "regulatory_jurisdiction": [
     "ADGM_FSRA",
