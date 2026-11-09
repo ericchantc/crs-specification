@@ -1,0 +1,31 @@
+{
+  "agent_did": "did:web:agents.bank.example.com:credit-decision-v3-prod",
+  "reporting_period_start": "2026-07-01",
+  "reporting_period_end": "2026-09-30",
+  "system_scope": {
+    "decision_categories": [
+      "retail_credit_scoring",
+      "loan_approval_recommendation"
+    ],
+    "deployer_did": "did:web:bank.example.com:ai-governance",
+    "authorization_chain_reference": "sha256:5cad9a8b1eec8210945f12911aa2d7be876ad06d229f6ec12380b186f3fe8933"
+  },
+  "calibration_rate": 0.87,
+  "false_positive_rate": 0.038,
+  "expected_calibration_error": 0.032,
+  "human_review_rate": 0.12,
+  "systematic_failure_disclosures": [],
+  "reattestation_event_log": [
+    {
+      "trigger_condition": "quarterly model refresh",
+      "update_description": "Quarterly model refresh: training data updated to include Q2 2026 lending outcomes",
+      "reattestation_completed_date": "2026-07-15"
+    }
+  ],
+  "attester_did": "did:web:example.com:attestation-authority",
+  "attestation_date": "2026-10-15",
+  "regulatory_jurisdiction": [
+    "ADGM_FSRA",
+    "MAS"
+  ]
+}

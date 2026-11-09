@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:vacra:crs:schema:0.1",
+  "title": "Calibration Reporting Standard (CRS) v0.1",
+  "description": "A 13-field structured record format for reporting the calibration of autonomous AI agents in financial services. Draft specification. Patent pending. Reference: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7511058",
+  "type": "object",
+  "required": [
+    "agent_did",
+    "reporting_period_start",
+    "reporting_period_end",
+    "system_scope",
+    "calibration_rate",
+    "false_positive_rate",
+    "expected_calibration_error",
+    "human_review_rate",
+    "systematic_failure_disclosures",
+    "reattestation_event_log",
+    "attester_did",
+    "attestation_date",
+    "regulatory_jurisdiction"
+  ],
+  "properties": {
+    "agent_did": {
+      "type": "string",
+      "description": "Field 1: W3C Decentralized Identifier (DID) of the AI agent. Binds this attestation record to a specific agent identifier. Format: did:<method>:<identifier>.",
+      "pattern": "^did:[a-z0-9]+:[^\\s]+$",
+      "examples": [
+        "did:web:agents.bank.example.com:credit-decision-v3"
+      ]
+    },
+    "reporting_period_start": {
+      "type": "string",
+      "description": "Field 2: Start date of the calibration reporting period (ISO 8601 date).",
+      "format": "date",
+      "examples": [
+        "2026-07-01"
+      ]
+    },
+    "reporting_period_end": {
+      "type": "string",
+      "description": "Field 3: End date of the calibration reporting period (ISO 8601 date). Must be after reporting_period_start.",
+      "format": "date",
+      "examples": [
+        "2026-09-30"
+      ]
+    },
+    "system_scope": {
+      "type": "object",
+      "description": "Field 4: System scope definition: the financial decision categories the agent is authorised to perform during this reporting period, the deploying institution, and the authorisation chain reference.",
+      "required": [
+        "decision_categories",
+        "deployer_did",
+        "authorization_chain_reference"
+      ],
+      "properties": {
+        "decision_categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "List of authorised financial decision categories covered by this attestation.",
+          "examples": [
+            [
+              "credit_risk_scoring",
+              "loan_approval_recommendation"
+            ]
+          ]
+        },
+        "deployer_did": {
+          "type": "string",
+          "description": "W3C DID of the deploying financial institution accountable for this agent.",
+          "pattern": "^did:[a-z0-9]+:[^\\s]+$",
+          "examples": [
+            "did:web:bank.example.com:ai-governance"
+          ]
+        },
+        "authorization_chain_reference": {
+          "type": "string",
+          "description": "Hash or URI referencing the authorisation chain document (board resolution, delegation record) that approved this agent's deployment.",
+          "examples": [
+            "sha256:5cad9a8b1eec8210945f12911aa2d7be876ad06d229f6ec12380b186f3fe8933"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "calibration_rate": {
+      "type": "number",
+      "description": "Field 5: Calibration Rate (CR): proportion of the agent's probabilistic predictions where stated confidence matches the observed outcome frequency (plus or minus 5 percentage points tolerance), over all qualifying decisions in the reporting period. Grouping of predictions, minimum sample size and outcome matching are not defined in v0.1. Reporting thresholds are described in the specification text, not in this file.",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "examples": [
+        0.87
+      ]
+    },
+    "false_positive_rate": {
+      "type": "number",
+      "description": "Field 6: False Positive Rate (FPR): proportion of negative cases incorrectly classified as positive over the reporting period.",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "examples": [
+        0.04
+      ]
+    },
+    "expected_calibration_error": {
+      "type": "number",
+      "description": "Field 7: Expected Calibration Error (ECE): probability-weighted mean absolute difference between predicted confidence and observed accuracy across equal-width confidence bins (Guo et al., 2017). The number of bins is not defined in v0.1. Reporting thresholds are described in the specification text, not in this file.",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "examples": [
+        0.032
+      ]
+    },
+    "human_review_rate": {
+      "type": "number",
+      "description": "Field 8: Human Review Rate: proportion of the agent's autonomous decisions reviewed by a qualified human principal during the reporting period. This is the author's proposed measure; it is not derived from, and does not demonstrate compliance with, any regulation or principle.",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "examples": [
+        0.15
+      ]
+    },
+    "systematic_failure_disclosures": {
+      "type": "array",
+      "description": "Field 9: Disclosures of decision categories where the agent's calibration fell outside the reporting thresholds described in the specification text during the reporting period. Empty array indicates no systematic failures.",
+      "items": {
+        "type": "object",
+        "required": [
+          "decision_category",
+          "failure_type",
+          "cr_value",
+          "ece_value"
+        ],
+        "properties": {
+          "decision_category": {
+            "type": "string",
+            "description": "The specific decision category in which the failure occurred."
+          },
+          "failure_type": {
+            "type": "string",
+            "enum": [
+              "cr_below_threshold",
+              "ece_above_threshold",
+              "both"
+            ],
+            "description": "Whether the failure was in CR, in ECE, or in both. An ECE in the remediation band has no value in v0.1."
+          },
+          "cr_value": {
+            "type": "number",
+            "description": "Observed CR value during the failure period.",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "ece_value": {
+            "type": "number",
+            "description": "Observed ECE value during the failure period.",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "additionalProperties": false
+      },
+      "examples": [
+        []
+      ]
+    },
+    "reattestation_event_log": {
+      "type": "array",
+      "description": "Field 10: Log of all material model updates since the prior attestation that triggered re-attestation. Empty array if no re-attestation events occurred.",
+      "items": {
+        "type": "object",
+        "required": [
+          "trigger_condition",
+          "update_description",
+          "reattestation_completed_date"
+        ],
+        "properties": {
+          "trigger_condition": {
+            "type": "string",
+            "description": "Free-text description of the condition that triggered re-attestation."
+          },
+          "update_description": {
+            "type": "string",
+            "description": "Description of the model update or change that triggered re-attestation."
+          },
+          "reattestation_completed_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date on which re-attestation was completed (ISO 8601)."
+          }
+        },
+        "additionalProperties": false
+      },
+      "examples": [
+        []
+      ]
+    },
+    "attester_did": {
+      "type": "string",
+      "description": "Field 11: W3C DID of the independent third-party attester issuing this attestation. The attester must be independent of the deploying institution; no accreditation scheme exists under CRS v0.1. Separates the deploying institution from the attesting authority.",
+      "pattern": "^did:[a-z0-9]+:[^\\s]+$",
+      "examples": [
+        "did:web:example.com:attestation-authority"
+      ]
+    },
+    "attestation_date": {
+      "type": "string",
+      "description": "Field 12: Date on which the attester completed this attestation record (ISO 8601 date).",
+      "format": "date",
+      "examples": [
+        "2026-10-15"
+      ]
+    },
+    "regulatory_jurisdiction": {
+      "type": "array",
+      "description": "Field 13: Regulatory jurisdiction(s) under which this attestation is issued. Multiple jurisdictions supported for cross-border deployments.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "ADGM_FSRA",
+          "MAS",
+          "FCA",
+          "FSB",
+          "FRB_FDIC_OCC",
+          "ESMA",
+          "HKMA",
+          "APRA",
+          "OSFI"
+        ]
+      },
+      "minItems": 1,
+      "examples": [
+        [
+          "ADGM_FSRA",
+          "MAS"
+        ]
+      ]
+    }
+  },
+  "additionalProperties": false
+}

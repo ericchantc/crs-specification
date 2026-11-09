@@ -1,0 +1,36 @@
+name: Review Feedback
+description: Share feedback from reviewing or evaluating CRS
+title: "[REVIEW] "
+labels: ["implementation"]
+body:
+  - type: markdown
+    attributes:
+      value: "Issues are public. Do not post confidential or personal data."
+  - type: dropdown
+    id: context
+    attributes:
+      label: Implementation context
+      options:
+        - Production AI system (financial services)
+        - Research / academic evaluation
+        - Insurance / underwriting tooling
+        - Regulatory / compliance tooling
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: finding
+    attributes:
+      label: What you found
+      description: Describe the gap, ambiguity, or edge case you encountered.
+    validations:
+      required: true
+  - type: textarea
+    id: fields
+    attributes:
+      label: Relevant CRS field(s)
+      description: Which fields or pillars does this affect? (e.g. F7 expected_calibration_error, Pillar 2)
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested resolution (optional)
