@@ -96,7 +96,7 @@ Full threshold analysis and supporting literature: see the reference paper (SSRN
 
 ## Reference Paper
 
-Chan, E.T.C. (2026). *Accountability Infrastructure for Agentic and Autonomous Financial Systems*. SSRN Working Paper 7511058. https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7511058
+Chan, E.T.C. (2026). *Post-Consultation Position Paper: Attribution Infrastructure for Autonomous Financial Agents*. SSRN Working Paper 7511058. https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7511058
 
 ## IP Notice
 
